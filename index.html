@@ -35,7 +35,7 @@
 
             document.getElementById("downloadButton").addEventListener("click", function(e) {
                 var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                download(image, 'wordoftheday.png');
+                download(image, 'wordoftheday.png');;
             })
 
             function draw() {
