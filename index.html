@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h1>Hello World</h1>
-        <p>I'm hosted with GitHub Pages.</p>
-        <canvas id="canvas" width="400" height="150"></canvas>
+        <img id="wotd" onload = "draw()" src = "wordoftheday.png" width = "0" height = "0">
+        <canvas id="canvas" width="606" height="426"></canvas>
+
+        <br></br>
+        <input type="text" id = "word">
+    
+
         <script>
-            alert("Check running");
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
-            let img = new Image("wordoftheday.png");
-            img.addEventListener("load", ()=>{
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+            var img=document.getElementById("wotd");
+
+            document.getElementById("word").addEventListener("keyup", function(evt){
+                update(this.value.toUpperCase());
+            }, false);
+
+            function draw() {
+                alert("Check running");
                 ctx.drawImage(img,0,0);
-                ctx.font = '50px serif';
-                ctx.fillText('Hello world', 50, 90);
-            });
+            };
+
+            function update(value) {
+                ctx.drawImage(img,0,0);
+                ctx.font = '48px impact';
+                ctx.fillText(value, 5, 418);
+            }
         </script>
+
     </body>
 </html>
