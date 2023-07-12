@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
     <body>
-        <img id="wotd" onload = "draw()" src = "wordoftheday.png" width = "0" height = "0">
+        <!--<img id="wotd" onload = "draw()" src = "wordoftheday.png" width = "0" height = "0" >-->
         <canvas id="canvas" width="606" height="426"></canvas>
 
         <br></br>
         <input type="text" id = "word">
-    
+        <button id = "downloadButton">Download Image</button>
+
 
         <script>
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
-            var img=document.getElementById("wotd");
+            var img=loadImage("https://i.imgur.com/bf6GqW5.png", draw)
+
+            
+            function loadImage(src, callback) {
+                var img = new Image()
+
+                img.onload = callback;
+                img.setAttribute('crossorigin', 'anonymous');
+
+                img.src = src;
+                return img;
+            }
+
 
             document.getElementById("word").addEventListener("keyup", function(evt){
                 update(this.value.toUpperCase());
             }, false);
 
+            document.getElementById("downloadButton").addEventListener("click", function(e) {
+                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                download(image, 'wordoftheday.png');
+            })
+
             function draw() {
-                alert("Check running");
                 ctx.drawImage(img,0,0);
             };
 
@@ -26,6 +46,14 @@
                 ctx.drawImage(img,0,0);
                 ctx.font = '48px impact';
                 ctx.fillText(value, 5, 418);
+            }
+
+            function download(data, filename = "untitled.png") {
+                var a = document.createElement('a');
+                a.href = data;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
             }
         </script>
 
