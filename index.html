@@ -10,7 +10,6 @@
 
         <br></br>
         <input type="text" id = "word">
-        <!--<button id = "downloadButton">Download Image</button>-->
 
 
         <script>
@@ -34,13 +33,6 @@
                 update(this.value.toUpperCase());
             }, false);
 
-            document.getElementById("downloadButton").addEventListener("click", function(e) {
-                var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                var saveImage = document.getElementById("wotdImage");
-                saveImage.src = image;
-                download(image, 'wordoftheday.png');
-            })
-
             function draw() {
                 ctx.drawImage(img,0,0);
             };
@@ -53,14 +45,6 @@
                 var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 var saveImage = document.getElementById("wotdImage");
                 saveImage.src = image;
-            }
-
-            function download(data, filename = "untitled.png") {
-                var a = document.createElement('a');
-                a.href = data;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
             }
         </script>
 
