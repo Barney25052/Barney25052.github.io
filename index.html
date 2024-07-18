@@ -5,17 +5,19 @@
     </head>
     <body>
         <!--<img id="wotd" onload = "draw()" src = "wordoftheday.png" width = "0" height = "0" >-->
-        <image id = "wotdImage" src = "https://i.imgur.com/bf6GqW5.png" class = "center"></image>
+        <image id = "wotdImage" src = "https://i.imgur.com/sjwVIDE.png" class = "center"></image>
         <canvas id="canvas" width="606" height="426"></canvas>
 
         <br></br>
         <input type="text" id = "word">
+        <br></br>
+        <input type="text" id = "day" value = "The day">
 
 
         <script>
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
-            var img=loadImage("https://i.imgur.com/bf6GqW5.png", draw)
+            var img=loadImage("https://i.imgur.com/sjwVIDE.png", draw)
 
             
             function loadImage(src, callback) {
@@ -30,17 +32,22 @@
 
 
             document.getElementById("word").addEventListener("keyup", function(evt){
-                update(this.value.toUpperCase());
+                update(this.value.toUpperCase(), document.getElementById("day").value.toUpperCase());
+            }, false);
+
+            document.getElementById("day").addEventListener("keyup", function(evt){
+                update(document.getElementById("word").value.toUpperCase(), this.value.toUpperCase());
             }, false);
 
             function draw() {
                 ctx.drawImage(img,0,0);
             };
 
-            function update(value) {
+            function update(value, day) {
                 ctx.drawImage(img,0,0);
                 ctx.font = '48px impact';
                 ctx.fillText(value, 5, 418);
+                ctx.fillText(day + ":", 2, 120);
 
                 var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                 var saveImage = document.getElementById("wotdImage");
